@@ -1,0 +1,62 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // La navegación sticky ya está manejada por CSS (position: sticky; top: 0;)
+    // Se podrían añadir aquí animaciones de scroll o funcionalidades globales si fueran necesarias.
+    console.log('main.js cargado. Navegación sticky activa.');
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Opcional: Desobservar una vez que se activa la animación
+                // observer.unobserve(entry.target); 
+            }
+        });
+    }, {
+        threshold: 0.2 // Activar cuando el 20% del elemento sea visible
+    });
+
+    timelineItems.forEach(item => {
+        item.classList.add('fade-in'); // Añade clase inicial para animación
+        observer.observe(item);
+    });
+
+    console.log('history.js cargado. Animaciones de línea de tiempo listas.');
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const detailsElements = document.querySelectorAll('details');
+
+    detailsElements.forEach(details => {
+        details.addEventListener('toggle', (event) => {
+            const summary = details.querySelector('summary');
+            if (details.open) {
+                summary.textContent = 'Ocultar información'; // Cambia el texto al abrir
+            } else {
+                summary.textContent = 'Ver información'; // Restaura el texto al cerrar
+            }
+        });
+        
+        // Asegura que el texto inicial del summary sea el correcto
+        const summary = details.querySelector('summary');
+        if (details.open) {
+            summary.textContent = 'Ocultar información';
+        } else {
+            summary.textContent = 'Ver información';
+        }
+    });
+
+    console.log('culture.js cargado. Funcionalidad de detalles/summary activa.');
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const destinationCards = document.querySelectorAll('.destination-card');
+
+    destinationCards.forEach(card => {
+        // Se podrían añadir efectos de hover o clics para expandir información si fuera necesario.
+        // Por ahora, la estructura es estática y el JS puede ser mínimo.
+        console.log('Tarjeta de destino encontrada:', card.querySelector('h2').textContent);
+    });
+
+    console.log('tourism.js cargado. Interacciones de turismo listas.');
+});

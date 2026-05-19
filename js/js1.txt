@@ -1,0 +1,50 @@
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('main.js cargado.');
+
+    const colors = [
+        '#FF6B6B', // Rojo suave
+        '#4ECDC4', // Turquesa
+        '#45B7D1', // Azul cielo
+        '#FED766', // Amarillo dorado
+        '#9B59B6', // Morado
+        '#34495E', // Gris oscuro
+        '#F39C12'  // Naranja
+    ];
+
+    const body = document.body;
+    const colorStorageKey = 'userSelectedPageColor';
+
+
+    function applyColor(color) {
+        body.style.backgroundColor = color;
+    }
+
+   
+    function getRandomColor() {
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        return colors[randomIndex];
+    }
+    const savedColor = localStorage.getItem(colorStorageKey);
+
+    if (savedColor) {
+        console.log('Aplicando color guardado:', savedColor);
+        applyColor(savedColor);
+    } else {
+        // Si no hay color guardado, seleccionar uno aleatorio y guardarlo
+        const randomColor = getRandomColor();
+        console.log('Aplicando color aleatorio:', randomColor);
+        applyColor(randomColor);
+        localStorage.setItem(colorStorageKey, randomColor);
+    }
+
+    const changeColorButton = document.getElementById('changeColorBtn');
+    if (changeColorButton) {
+        changeColorButton.addEventListener('click', () => {
+            const newColor = getRandomColor();
+            applyColor(newColor);
+            localStorage.setItem(colorStorageKey, newColor);
+            console.log('Color cambiado y guardado:', newColor);
+        });
+    }
+   
+});
